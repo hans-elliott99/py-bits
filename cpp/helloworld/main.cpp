@@ -262,9 +262,6 @@ void Multiply2(int a, int b) //void -> return nothing
 
 int main()
 {
-    /* The basics of C++ 
-     * 
-     */
     hello_world();
     math_operators();
     math_expression();
