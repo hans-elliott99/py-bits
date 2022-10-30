@@ -9,14 +9,14 @@ import argparse
 
 def main(image_path, resize_factor=1, rm_bg=False, invert=False, save_to=None):
 
-    density = " _.,-=+:;cba!?0123456789$W#@Ñ" #since pixel value of 0 = black, let's start with " "
-    ## density = "█▓▒░:."
+    density = " _.,-=+:;cba!?0123456789$W#@N" #since pixel value of 0 = black, let's start with " "
+    # density = " .:░▒▓█"  #Ñ
     if invert:
         density = density[::-1]
     # density = density + " "*(51-len(density))
 
     # Pixel to ASCII Mapping
-    range_size = 9 #255 // 9 = len(density)
+    range_size = 9 #255 // 9 = len(density) - 1
     pix2asc = {i : density[i] for i in range(0, len(density))}
     def get_ascii(value):
         idx = int(value // range_size)
