@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// Pointers (also stack vs heap), References, Classes & Structs, Enums, Constructors & Destructors
+// Pointers (also stack vs heap), References, Classes & Structs, Enums, Constructors & Destructors, Inheritance [(Pure) Virtual ]
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 /* POINTERS - a number (integer) which stores a memory address, corresponding to some block of bytes
@@ -50,7 +50,7 @@ int heap_allocate()
     char* buffer  = new char[8];
     // the above returns a pointer to the *beginning* of the allocated block of memory
     // we can fill the block using cstring's memset()
-    memset(buffer, 0, 8); //takes pointer, a value, and the # of bytes to fill
+    memset(buffer, 0, 8); //takes pointer, a value, and the # of bytes to fill (in this case we fill with 0s)
 
     delete[] buffer; //we should delete memory we create on the heap.
 
@@ -352,23 +352,111 @@ void entity2_example()
 
 }
 
+/** INHERITANCE
+ * Allows us to have a related hierarchy of classes... a base class with common functionality + sub-classes 
+*/
+/** VIRTUAL FUNCTIONS
+ * Virtual functions allow us to override methods in sub-classes.
+ * Say B is a subclass of A, if we create a virtual method in A we have the option to override it in B.
+ * Virtual functions arent free - they require additional memory to store a V-table which maps from overriddent function to base function
+*/
+/** PURE VIRTUAL FUNCTIONS
+ * Same as an 'abstract method' or 'interface'
+ * Define a function in a base class that does not have an implementation, and force subclasses to fill out the implementation .
+ * An "interface" is a class that exists of only unimplemented methods, acting as a sort of template.
+*/
+/**VISIBILITY
+ * No effect on performance or compilation, just exists to help write better code.
+ * Private - only the object containing the private method/variable can access it (a 'friend' can also access private members tho)
+ * Protected - the current class and any subclass can access the method/variable.
+ * Public - anyone - the class, subclass, or anyone can access the method/variable.
+*/
+
+class Printable
+{
+public:
+    virtual string GetClassName() = 0; //pure virtual
+};
+
+class BaseEntity : public Printable
+{
+// Every sub-entity will have these attributes (inheritance)
+public:
+    float X, Y;
+    void Move(float xa, float ya)
+    {
+        X += xa;
+        Y += ya;
+    }
+    // Virtual Function... we can override the implementation in any subclass
+    virtual string GetName() {return "Entity"; }
+
+    // Pure Virtual Function... we have to implement it in any subclass
+    virtual string LastName() = 0; //seting = 0 makes it 'pure'
+
+    // Implementing the pure virtual fn inherited from Printable
+    string GetClassName() override {return "BaseEntity"; }
+};
+
+
+// SubClass - this class is technically *both* types
+class NewPlayer : public BaseEntity
+{
+private:
+    string m_Name;
+public:
+    NewPlayer(const string& name) //constructor to declare a name
+    {
+        m_Name = name;
+    }
+    void PrintName() {cout << m_Name << endl; }
+
+    // ovverride the virtual function (override keyword is optional)
+    string GetName() override {return m_Name; }
+
+    // implement the *pure* virtual function
+    string LastName() override {return "Elliott"; }
+
+    // override getclassname
+    string GetClassName() override {return "NewPlayer"; }
+
+};
+
+// Example - a function that can print a class's name by extracting the GetClassName method
+void Print(Printable* obj)
+{
+    cout << obj->GetClassName() << endl;
+}
+
+void inheritance_example()
+{
+    NewPlayer player("Hans");
+    player.X = 2.0f; //player inherits X
+    player.PrintName(); //Prints Hans using the new method added to player virtual function
+    cout << player.GetName() << endl; //Prints Hans using the overrident virtual fn
+    cout << player.LastName() << endl; //Prints Elliott using the implemented pure virtual fn
+
+
+    NewPlayer player2("Bob");
+    Print(&player2);  //prints NewPlayer
+}
 
 
 
-///
+/////////////////////////////////////////////////////////////////
 void log_test()
 {
-    //Simple Log class
-    // SimpleLog log;
-    // log.SetLevel(log.LogLevelError);
-    // log.Warn("Hello");
-    // log.Info("Hello");
-    // log.Error("Hello");
+    // Simple Log class
+    SimpleLog slog;
+    slog.SetLevel(slog.LogLevelError);
+    slog.Warn("Simple Hello");
+    slog.Info("Simple Hello");
+    slog.Error("Simple Hello");
 
     // More advanced, w/ Enums.
     EnumLog log;
     log.SetLevel(EnumLog::LevelError);
-    log.Warn("hello"); log.Info("hello"); log.Error("hello");
+    log.Warn("enum hello"); log.Info("enum hello"); log.Error("enum hello");
 }
 
 
@@ -380,6 +468,7 @@ int main()
     Increment();
     entity_example();
     entity2_example();
+    inheritance_example();
 
     log_test();
     // cin.get();
