@@ -27,9 +27,6 @@ assert len(elves) == len(tot_calories)
 print(f"Most calories held by any elf: {max(tot_calories)}")
 
 # Get total calories of top 3 calory-carrying elves
-top3 = []
-for i in range(0, 3):
-    top3.append( max(tot_calories) )
-    tot_calories.pop( tot_calories.index(max(tot_calories)) )
+top3 = sorted(tot_calories, reverse=True)[:3]
 
 print(f"Total calories held by the top 3 elves: {sum(top3)}")
