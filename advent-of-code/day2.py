@@ -4,6 +4,7 @@
 # Day 2: Rock Paper Scissors
 # hans elliott
 
+import sys
 
 # shape identifier / score conversion
 rock = 1
@@ -59,6 +60,7 @@ def get_outcome_score(them_: str, you_: str) -> int:
     return score
 
 
+
 # PART 2
 # Determine what shape they are playing given the input string
 # Determine what outcome you need given the input string
@@ -92,7 +94,7 @@ if __name__=="__main__":
     score_part1 = 0
     score_part2 = 0
 
-    with open("./advent-of-code/inputs/day2.txt", 'r') as f:
+    with open(sys.argv[1], 'r') as f:
         for line in f:
             l = line.strip().split(' ')
             them_, you_ = l[0], l[1]
