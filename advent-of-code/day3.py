@@ -24,10 +24,10 @@ def score_char(char:str) -> int:
 # Part 1: Each line is 2 equal sized rucksacks, find the one
 #         repeating char and get its priority score
 def get_priority_score_part1(line: str) -> int:
-    split_idx = int(len(line) / 2)
+    split_idx = len(line) // 2
     ruck1, ruck2 = line[:split_idx], line[split_idx:]
 
-    repeat = set([c for c in set(ruck2) if c in set(ruck1)])
+    repeat = set([c for c in set(ruck2) if c in set(ruck1)])                     ##use: set(ruck1) & set(ruck2)
     assert(len(repeat)==1)
     repeat = list(repeat)[0]
 
@@ -39,7 +39,7 @@ def get_priority_score_part2(group: list[str]) -> int:
     assert len(group) == 3
 
     repeat = set(
-        [c for c in set(group[0]) if c in set(group[1]) and c in set(group[2])] 
+        [c for c in set(group[0]) if c in set(group[1]) and c in set(group[2])]   ##use: set(a) & set(b) & set(c)
     )
     assert len(repeat) == 1
     repeat = list(repeat)[0]
