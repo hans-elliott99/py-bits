@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env python3
 
 import cv2
 import matplotlib.pyplot as plt
@@ -42,7 +42,7 @@ def main(image_path, resize_factor=1, rm_bg=False, invert=False, save_to=None):
         image = rembg.remove(image)
         image = image[:, :,0] 
 
-    plt.imshow(image, cmap="bone"); plt.show();
+    # plt.imshow(image, cmap="bone"); plt.show();
 
     # Map pixels to ASCII
     u, inv = np.unique(image, return_inverse=True)
