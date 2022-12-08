@@ -24,14 +24,14 @@ def change_current_dir(line:str, cwd:list[str]) -> list[str]:
 
 def parse_ls_files(line, cwd):
     """Parse files listed by `ls` and add their sizes to all parent dirs"""
-    size, file = line.split(' ')
+    size, f = line.split()
     directories['/'] += float(size)
 
     path = '/'
     for d in cwd[1:]:
         path += d
         directories[path] += float(size)
-        path += '/'
+        path += '/'    
 
 if __name__=="__main__":
 
@@ -49,11 +49,11 @@ if __name__=="__main__":
                 parse_ls_files(line, cwd)        
 
 
-    # Part 1: total size of directories contain files of size <= 100,000
+    # Part 1: total size of directories that contain files of size <= 100,000
     part1 = sum( [v for v in directories.values() if v <= 100_000] )
 
     # Part 2: Size of smallest directory which, if deleted, provides enough
-    #          space to incorporate the freeup size           
+    #          space to incorporate the needed free space           
     total_space, need_free = 70_000_000, 30_000_000
     total_used = directories["/"]
     min_freeup = need_free - (total_space-total_used)
