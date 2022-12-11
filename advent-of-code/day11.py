@@ -18,7 +18,7 @@ class Monkey:
         self.items_inspected = 0
 
     def _parse_text(self, text) -> None:
-        """Parse the data which defines the monkey's params
+        """Parse the data which defines the monkey's params.
         """
         for string in text:
             key, value = string.strip().split(':')
@@ -59,7 +59,7 @@ class Monkey:
             return new
 
     def _test_divisibility(self, item) -> bool:
-        """Test if item is divisible by the 'test_divisor' value
+        """Test if item is divisible by the 'test_divisor' value.
         """
         if item % self.test_divisor != 0:
             return False
@@ -82,8 +82,8 @@ class Monkey:
 
 
     def throw_items(self, worry_coef:int=1, modulus:int=0) -> list[tuple[int,int]]:
-        """Perform one turn. Inpsect all items and return list of tuples:
-        (monkey to throw item to, item value)
+        """Do one turn. Inpsect all items and return list of tuples:
+        (monkey to throw item to, item value).
         """
         output = []
         if self.items:
@@ -94,7 +94,7 @@ class Monkey:
         return output
     
     def catch_item(self, item:int):
-        """Receive item and append to end of items list
+        """Receive item and append to end of items list.
         """
         self.items.append(item)
 
@@ -132,8 +132,8 @@ def p2(monkeys):
     # reduced somehow. Can keep the values small by using:
     #   item % LeastCommonMultiple(test_divisors for all monkeys),
     # because testing if (item % LCM) is divisible by some number is equivalent to
-    # testing if if (item) is divisible by some number. 
-    # Simulate finding least common multiple by finding the lists inner product,
+    # testing if (item) is divisible by some number. 
+    # Simulate finding least common multiple by finding the list's inner product,
     # since all divisors are prime numbers.
     monks = copy.deepcopy(monkeys)
     mod   = math.prod([m.test_divisor for m in monkeys])
