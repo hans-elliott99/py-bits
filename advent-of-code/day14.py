@@ -162,7 +162,7 @@ if __name__=="__main__":
     print("Part 2: Number of sand units", len(sand2))
 
     rows = draw_grid(rocks, sand2, floor_bonus=2)
-    with open("advent-of-code/inputs/day14viz.txt", "w") as f:
+    with open("advent-of-code/outputs/day14viz.txt", "w") as f:
         for row in rows:
             f.write(row+'\n')
 
