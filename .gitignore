@@ -1,4 +1,8 @@
 *.gif
-.vscode
+*.mp3
 dev.ipynb
 advent-of-code/inputs/
+
+.vscode
+.venv
+.*venv
