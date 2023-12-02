@@ -1,8 +1,4 @@
-*.gif
-*.mp3
-dev.ipynb
-advent-of-code/inputs/
-
-.vscode
-.venv
 .*venv
+
+twitter_notes
+randomscrapes
