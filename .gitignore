@@ -1,4 +1,5 @@
 .*venv
+.vscode
 
 twitter_notes
 randomscrapes
