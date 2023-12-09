@@ -95,7 +95,6 @@ int main() {
 
     std::string line;
     while (std::getline(input, line)) {
-        std::istringstream iss(line);
         total1 += mapnum_part1(line);
         total2 += mapnum_part2(line);
     }
